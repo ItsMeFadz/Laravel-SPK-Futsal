@@ -26,4 +26,25 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js')}}"></script>
 
+<!-- Custom Toast JS -->
+<script src="{{ asset('assets/js/toasts-custom.js') }}"></script>
+
+<script>
+    @if(session('success'))
+        toastDetails.success.text = "{{ session('success') }}";
+        createToast('success');
+    @endif
+
+    @if(session('error'))
+        toastDetails.error.text = "{{ session('error') }}";
+        createToast('error');
+    @endif
+
+    @if($errors->any())
+        toastDetails.error.text = "{{ $errors->first() }}";
+        createToast('error');
+    @endif
+</script>
+
+
 @yield('page-script')

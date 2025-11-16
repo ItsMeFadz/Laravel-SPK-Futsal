@@ -57,8 +57,8 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
-            <a href="index.html" class="menu-link">
+        <li class="menu-item {{ $active === 'Dashboard' ? 'active' : '' }}">
+            <a href="{{route('Dashboard')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-alt"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -67,13 +67,13 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Data Master</span>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+        <li class="menu-item {{ $active === 'Pemain' ? 'active' : '' }}">
+            <a href="{{ route('index.pemain') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-pin"></i>
-                <div data-i18n="Account Settings">Player</div>
+                <div data-i18n="Account Settings">Pemain</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ $active === 'Kriteria' ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                 <div data-i18n="Misc">Kriteria</div>
@@ -83,13 +83,13 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Latihan &amp; Penilaian</span></li>
         <!-- Cards -->
         <!-- User interface -->
-        <li class="menu-item">
+        <li class="menu-item {{ $active === 'Latihan' ? 'active' : '' }}">
             <a href="javascript:void(0)" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="User interface">Latihan</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ $active === 'Penilaian' ? 'active' : '' }}">
             <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-search"></i>
                 <div data-i18n="Basic">Penilaian</div>
@@ -98,13 +98,13 @@
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Analisis &amp; Laporan</span></li>
         <!-- Extended components -->
-        <li class="menu-item">
+        <li class="menu-item {{ $active === 'Perhitungan' ? 'active' : '' }}">
             <a href="javascript:void(0)" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bar-chart-square"></i>
                 <div data-i18n="Extended UI">Perhitungan WP-Topsis</div>
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ $active === 'Hasil' ? 'active' : '' }}">
             <a href="javascript:void(0)" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-list-check"></i>
                 <div data-i18n="Extended UI">Hasil Penilaian</div>
@@ -114,7 +114,7 @@
         <!-- Forms & Tables -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
         <!-- Forms -->
-        <li class="menu-item">
+        <li class="menu-item {{ $active === 'User' ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Form Elements">User</div>
