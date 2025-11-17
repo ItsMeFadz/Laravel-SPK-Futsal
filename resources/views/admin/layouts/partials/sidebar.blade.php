@@ -114,10 +114,10 @@
         <!-- Forms & Tables -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
         <!-- Forms -->
-        <li class="menu-item {{ $active === 'User' ? 'active' : '' }}">
-            <a href="javascript:void(0);" class="menu-link">
+        <li class="menu-item {{ $active === 'Pengguna' ? 'active' : '' }}">
+            <a href="{{ route('index.pengguna') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                <div data-i18n="Form Elements">User</div>
+                <div data-i18n="Form Elements">Pengguna</div>
             </a>
         </li>
     </ul>
