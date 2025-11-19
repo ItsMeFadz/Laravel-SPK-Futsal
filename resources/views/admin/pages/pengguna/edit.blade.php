@@ -55,8 +55,8 @@
                         <label class="form-label" for="basic-default-fullname">Role</label>
                         <select class="form-select" name="role" aria-label="Default select example">
                             <option selected disabled>Select this role</option>
-                            <option value="1" @selected($pengguna->role === 1)>Admin</option>
-                            <option value="2" @selected($pengguna->role === 2)>User</option>
+                            <option value="1" @selected($pengguna->role == 1)>Admin</option>
+                            <option value="2" @selected($pengguna->role == 2)>User</option>
                         </select>
                     </div>
                     <div class="mb-3 col-md-6 form-password-toggle">
@@ -73,7 +73,7 @@
                 </div>
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                    <a href="/pengguna" class="btn btn-outline-secondary me-3">Kembali</a>
+                    <a href="/pengguna" class="btn btn-outline-secondary">Kembali</a>
                 </div>
             </div>
         </form>

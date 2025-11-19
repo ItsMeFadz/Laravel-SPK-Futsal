@@ -1,6 +1,10 @@
 @extends('admin.layouts.main')
+@section('page-script')
+    <script src="{{ asset('assets/js/pagenation.js') }}"></script>
+@endsection
+
 @section('content')
-@include('component.SweetAlert')
+    @include('component.SweetAlert')
     <div class="card">
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="card-header">Daftar Pemain</h5>
@@ -9,10 +13,11 @@
             </a>
         </div>
         <div class="table-responsive text-nowrap">
-            <table class="table table-striped">
+            <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
+                        <th>Kode</th>
                         <th>Nama Pemain</th>
                         <th>Kelas</th>
                         <th>Umur</th>
@@ -20,10 +25,11 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="table-border-bottom-0">
+                <tbody class="table-border-bottom-0" id="userTableBody">
                     @foreach ($pemain as $item)
                         <tr style="display: {{ $loop->index < 10 ? '' : 'none' }};">
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->kode_pemain }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>{{ $item->umur }}</td>
@@ -57,7 +63,7 @@
 
                                     <a href="/pemain/edit/{{ $item->id }}" class="d-inline-flex align-items-center">
                                         <button type="button" class="btn btn-xs btn-outline-primary" title="Edit">
-                                            <i class='bx bx-pencil'></i> 
+                                            <i class='bx bx-pencil'></i>
                                         </button>
                                     </a>
 
@@ -67,7 +73,7 @@
                                         @method('DELETE')
                                         <button type="button" class="btn btn-xs btn-outline-danger"
                                             onclick="confirmDelete({{ $item->id }})" title="Delete">
-                                            <i class='bx bx-trash'></i> 
+                                            <i class='bx bx-trash'></i>
                                         </button>
                                     </form>
                                 </div>
@@ -76,6 +82,12 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="demo-inline-spacing mx-2">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-sm justify-content-end" id="pagination">
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 @endsection

@@ -74,7 +74,7 @@
             </a>
         </li>
         <li class="menu-item {{ $active === 'Kriteria' ? 'active' : '' }}">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="{{route('index.kriteria')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                 <div data-i18n="Misc">Kriteria</div>
             </a>

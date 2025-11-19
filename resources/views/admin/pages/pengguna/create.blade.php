@@ -72,7 +72,7 @@
                 </div>
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                    <a href="/pengguna" class="btn btn-outline-secondary me-3">Kembali</a>
+                    <a href="/pengguna" class="btn btn-outline-secondary">Kembali</a>
                 </div>
             </div>
         </form>

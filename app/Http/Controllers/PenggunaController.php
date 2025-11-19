@@ -77,11 +77,12 @@ class PenggunaController extends Controller
 
         // Validasi
         $validated = $request->validate([
-            'username' => 'required|unique:users,username',
+            // 'username' => 'required|unique:users,username' . $id,
+            'username' => 'required|unique:users,username,' . $id,
             'name' => 'required',
             'role' => 'required',
-            'password' => 'required|min:8|confirmed',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'password' => 'nullable|min:8|confirmed',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'required' => 'Kolom :attribute harus diisi.',
             'image' => 'Kolom :attribute harus berupa file gambar.',

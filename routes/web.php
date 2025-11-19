@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PemainController;
 use App\Http\Controllers\PenggunaController;
@@ -21,6 +22,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/pemain/edit/{id}', 'edit')->name('edit.pemain');
         Route::post('/pemain/update/{id}', 'update')->name('update.pemain');
         Route::delete('/pemain/delete/{id}', 'destroy')->name('delete.pemain');
+    });
+
+    Route::controller(KriteriaController::class)->group(function () {
+        Route::get('/kriteria', 'index')->name('index.kriteria');
+        Route::get('/kriteria/create', 'create')->name('create.kriteria');
+        Route::post('/kriteria/store', 'store')->name('store.kriteria');
+        Route::get('/kriteria/edit/{id}', 'edit')->name('edit.kriteria');
+        Route::post('/kriteria/update/{id}', 'update')->name('update.kriteria');
+        Route::delete('/kriteria/delete/{id}', 'destroy')->name('delete.kriteria');
     });
 
 

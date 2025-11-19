@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-fullname">Posisi</label>
-                            <select class="form-select" name="posisi" aria-label="Default select example">
+                            <select class="form-select" name="posisi" aria-label="Default select example" required>
                                 <option selected>Open this select menu</option>
                                 <option value="1" {{ old('posisi') == 1 ? 'selected' : '' }}>GK</option>
                                 <option value="2" {{ old('posisi') == 2 ? 'selected' : '' }}>Anchor</option>
@@ -59,8 +59,8 @@
                             <div class="form-text"></div>
                         </div>
                     </div>
-                    <a href="/pemain" class="btn btn-secondary me-3">Kembali</a>
-                    <button type="submit" class="btn btn-primary">Kirim</button>
+                    <button type="submit" class="btn btn-primary me-2">Kirim</button>
+                    <a href="/pemain" class="btn btn-secondary">Kembali</a>
                 </form>
             </div>
         </div>
