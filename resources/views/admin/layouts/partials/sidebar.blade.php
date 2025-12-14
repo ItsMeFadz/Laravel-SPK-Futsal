@@ -58,7 +58,7 @@
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item {{ $active === 'Dashboard' ? 'active' : '' }}">
-            <a href="{{route('Dashboard')}}" class="menu-link">
+            <a href="{{ route('Dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-alt"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -67,16 +67,22 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Data Master</span>
         </li>
+        <li class="menu-item {{ $active === 'Kriteria' ? 'active' : '' }}">
+            <a href="{{ route('index.kriteria') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                <div data-i18n="Misc">Kriteria</div>
+            </a>
+        </li>
+        <li class="menu-item {{ $active === 'Posisi' ? 'active' : '' }}">
+            <a href="{{ route('index.posisi') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-direction-right"></i>
+                <div data-i18n="Account Settings">Posisi</div>
+            </a>
+        </li>
         <li class="menu-item {{ $active === 'Pemain' ? 'active' : '' }}">
             <a href="{{ route('index.pemain') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-pin"></i>
                 <div data-i18n="Account Settings">Pemain</div>
-            </a>
-        </li>
-        <li class="menu-item {{ $active === 'Kriteria' ? 'active' : '' }}">
-            <a href="{{route('index.kriteria')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                <div data-i18n="Misc">Kriteria</div>
             </a>
         </li>
         <!-- Components -->
@@ -84,13 +90,13 @@
         <!-- Cards -->
         <!-- User interface -->
         <li class="menu-item {{ $active === 'Latihan' ? 'active' : '' }}">
-            <a href="javascript:void(0)" class="menu-link">
+            <a href="{{ route('index.latihan') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="User interface">Latihan</div>
             </a>
         </li>
         <li class="menu-item {{ $active === 'Penilaian' ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="{{route('index.penilaian')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-search"></i>
                 <div data-i18n="Basic">Penilaian</div>
             </a>

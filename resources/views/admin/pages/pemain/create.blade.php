@@ -12,45 +12,51 @@
                     <div class="row mb-2">
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-company">Kode Pemain</label>
-                            <input type="text" class="form-control" placeholder="P01" name="kode_pemain" value="{{ old('kode_pemain') }}" required />
+                            <input type="text" class="form-control" placeholder="P01" name="kode_pemain"
+                                value="{{ old('kode_pemain') }}" required />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-fullname">Nama Lengkap</label>
-                            <input type="text" class="form-control" placeholder="Alex Anwar" name="name" value="{{ old('name') }}" required />
+                            <input type="text" class="form-control" placeholder="Alex Anwar" name="name"
+                                value="{{ old('name') }}" required />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-company">Jenis Kelamin</label>
                             <div class="form-check mt-1">
                                 <input name="jk" class="form-check-input" type="radio" value="1"
-                                    id="defaultRadio1" {{ old("jk") == '1' ? 'checked' : '' }} checked required />
+                                    id="defaultRadio1" {{ old('jk') == '1' ? 'checked' : '' }} checked required />
                                 <label class="form-check-label" for="defaultRadio1">Laki - Laki</label>
                             </div>
                             <div class="form-check">
-                                <input name="jk" class="form-check-input" type="radio" {{ old("jk") == '2' ? 'checked' : '' }} value="2" />
+                                <input name="jk" class="form-check-input" type="radio"
+                                    {{ old('jk') == '2' ? 'checked' : '' }} value="2" />
                                 <label class="form-check-label" for="defaultRadio2"> Perempuan </label>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-fullname">Kelas</label>
-                            <input type="text" class="form-control" placeholder="XII TKJ 5" name="kelas" value="{{ old('kelas') }}" required />
+                            <input type="text" class="form-control" placeholder="XII TKJ 5" name="kelas"
+                                value="{{ old('kelas') }}" required />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-company">Umur</label>
                             <div class="input-group input-group-merge">
                                 <input type="text" class="form-control" name="umur" placeholder="xx"
-                                    aria-label="john.doe" aria-describedby="basic-default-email2" value="{{ old('umur') }}" required />
+                                    aria-label="john.doe" aria-describedby="basic-default-email2"
+                                    value="{{ old('umur') }}" required />
                                 <span class="input-group-text" id="basic-default-email2">Tahun</span>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-fullname">Posisi</label>
-                            <select class="form-select" name="posisi" aria-label="Default select example" required>
+                            <select class="form-select" name="id_posisi" aria-label="Default select example" required>
                                 <option selected>Open this select menu</option>
-                                <option value="1" {{ old('posisi') == 1 ? 'selected' : '' }}>GK</option>
-                                <option value="2" {{ old('posisi') == 2 ? 'selected' : '' }}>Anchor</option>
-                                <option value="3" {{ old('posisi') == 3 ? 'selected' : '' }}>Flank Kanan</option>
-                                <option value="4" {{ old('posisi') == 4 ? 'selected' : '' }}>Flank Kiri</option>
-                                <option value="5" {{ old('posisi') == 5 ? 'selected' : '' }}>Pivot</option>
+                                @foreach ($posisi as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ old('id_posisi') == $item->id ? 'selected' : '' }}>
+                                        {{ ucfirst($item->name) }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-12 mb-3">

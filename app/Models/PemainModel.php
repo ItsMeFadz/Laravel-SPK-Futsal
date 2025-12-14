@@ -17,7 +17,12 @@ class PemainModel extends Model
         'jk',
         'kelas',
         'umur',
-        'posisi',
+        'id_posisi',
         'image',
     ];
+
+    public function posisi()
+    {
+        return $this->belongsTo(PosisiModel::class, 'id_posisi');
+    }
 }

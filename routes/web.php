@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\LatihanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PemainController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\PosisiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class, 'index'])->name('Login');
@@ -15,6 +18,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+    Route::controller(KriteriaController::class)->group(function () {
+        Route::get('/kriteria', 'index')->name('index.kriteria');
+        Route::get('/kriteria/create', 'create')->name('create.kriteria');
+        Route::post('/kriteria/store', 'store')->name('store.kriteria');
+        Route::get('/kriteria/edit/{id}', 'edit')->name('edit.kriteria');
+        Route::post('/kriteria/update/{id}', 'update')->name('update.kriteria');
+        Route::delete('/kriteria/delete/{id}', 'destroy')->name('delete.kriteria');
+    });
+
+    Route::controller(PosisiController::class)->group(function () {
+        Route::get('/posisi', 'index')->name('index.posisi');
+        Route::get('/posisi/create', 'create')->name('create.posisi');
+        Route::post('/posisi/store', 'store')->name('store.posisi');
+        Route::get('/posisi/edit/{id}', 'edit')->name('edit.posisi');
+        Route::post('/posisi/update/{id}', 'update')->name('update.posisi');
+        Route::delete('/posisi/delete/{id}', 'destroy')->name('delete.posisi');
+    });
+
     Route::controller(PemainController::class)->group(function () {
         Route::get('/pemain', 'index')->name('index.pemain');
         Route::get('/pemain/create', 'create')->name('create.pemain');
@@ -24,14 +45,24 @@ Route::middleware('auth')->group(function () {
         Route::delete('/pemain/delete/{id}', 'destroy')->name('delete.pemain');
     });
 
-    Route::controller(KriteriaController::class)->group(function () {
-        Route::get('/kriteria', 'index')->name('index.kriteria');
-        Route::get('/kriteria/create', 'create')->name('create.kriteria');
-        Route::post('/kriteria/store', 'store')->name('store.kriteria');
-        Route::get('/kriteria/edit/{id}', 'edit')->name('edit.kriteria');
-        Route::post('/kriteria/update/{id}', 'update')->name('update.kriteria');
-        Route::delete('/kriteria/delete/{id}', 'destroy')->name('delete.kriteria');
+    Route::controller(LatihanController::class)->group(function () {
+        Route::get('/latihan', 'index')->name('index.latihan');
+        Route::get('/latihan/create', 'create')->name('create.latihan');
+        Route::post('/latihan/store', 'store')->name('store.latihan');
+        Route::get('/latihan/edit/{id}', 'edit')->name('edit.latihan');
+        Route::post('/latihan/update/{id}', 'update')->name('update.latihan');
+        Route::delete('/latihan/delete/{id}', 'destroy')->name('delete.latihan');
     });
+
+    Route::controller(PenilaianController::class)->group(function () {
+        Route::get('/penilaian', 'index')->name('index.penilaian');
+        Route::get('/penilaian/create', 'create')->name('create.penilaian');
+        Route::post('/penilaian/store', 'store')->name('store.penilaian');
+        Route::get('/penilaian/edit/{id}', 'edit')->name('edit.penilaian');
+        Route::post('/penilaian/update/{id}', 'update')->name('update.penilaian');
+        Route::delete('/penilaian/delete/{id}', 'destroy')->name('delete.penilaian');
+    });
+
 
 
 

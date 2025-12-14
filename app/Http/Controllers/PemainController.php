@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PemainModel;
+use App\Models\PosisiModel;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\{Validator, Storage};
@@ -21,18 +22,22 @@ class PemainController extends Controller
 
     public function create()
     {
+        $posisi = PosisiModel::all();
         return view('admin.pages.pemain.create', [
             'title' => 'Pemain',
-            'active' => 'Pemain'
+            'active' => 'Pemain',
+            'posisi' => $posisi,
         ]);
     }
-
+    
     public function edit($id)
     {
+        $posisi = PosisiModel::all();
         return view('admin.pages.pemain.edit', [
             'title' => 'Pemain',
             'active' => 'Pemain',
             'pemain' => PemainModel::findOrFail($id),
+            'posisi' => $posisi,
         ]);
     }
 
@@ -45,7 +50,7 @@ class PemainController extends Controller
             'jk' => 'required',
             'kelas' => 'required',
             'umur' => 'required',
-            'posisi' => 'required',
+            'id_posisi' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'required' => 'Kolom :attribute harus diisi.',
@@ -82,7 +87,7 @@ class PemainController extends Controller
             'jk' => 'required',
             'kelas' => 'required',
             'umur' => 'required',
-            'posisi' => 'required',
+            'id_posisi' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'required' => 'Kolom :attribute harus diisi.',

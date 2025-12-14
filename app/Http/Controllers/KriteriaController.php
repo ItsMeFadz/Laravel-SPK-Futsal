@@ -94,11 +94,6 @@ class KriteriaController extends Controller
             return redirect()->back()->with('error', 'Data Tidak Ditemukan.');
         }
 
-        // Hapus foto
-        if ($kriteria->image && Storage::disk('public')->exists($kriteria->image)) {
-            Storage::disk('public')->delete($kriteria->image);
-        }
-
         $kriteria->delete();
 
         return redirect()->back()->with('success', 'Data Berhasil Dihapus.');

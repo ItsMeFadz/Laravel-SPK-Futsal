@@ -17,4 +17,10 @@ class KriteriaModel extends Model
         'bobot',
         'atribut',
     ];
+
+    public function bobotKriteria()
+    {
+        return $this->hasMany(BobotPosisiModel::class, 'posisi_id');
+    }
+
 }

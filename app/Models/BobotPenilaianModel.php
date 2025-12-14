@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class BobotPenilaianModel extends Model
+{
+    use HasFactory;
+    protected $table = 'bobot_penilaian';
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'latihan_id',
+        'pemain_id',
+        'kriteria_id',
+        'bobot',
+    ];
+
+    public function pemain()
+    {
+        return $this->belongsTo(\App\Models\PemainModel::class, 'pemain_id');
+    }
+}
