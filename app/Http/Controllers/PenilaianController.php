@@ -78,6 +78,10 @@ class PenilaianController extends Controller
             );
         }
 
+        DetailLatihanModel::where('latihan_id', $penilaian->latihan_id)
+            ->where('pemain_id', $penilaian->pemain_id)
+            ->update(['status' => 2]);
+
         return redirect('/penilaian')->with('success', 'Penilaian berhasil diperbarui!');
     }
 

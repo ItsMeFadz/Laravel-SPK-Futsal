@@ -14,6 +14,7 @@ class DetailLatihanModel extends Model
     protected $fillable = [
         'latihan_id',
         'pemain_id',
+        'status', //01.belum lengkap, 02. sudah lengkap
     ];
 
     public function pemain()

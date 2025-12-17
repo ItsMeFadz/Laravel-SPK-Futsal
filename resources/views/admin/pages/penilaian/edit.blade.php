@@ -10,12 +10,17 @@
                     @csrf
                     @method('POST')
                     <div class="row mb-2">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="basic-default-company">Kode Pemain</label>
+                            <input type="text" class="form-control"
+                                value="{{ $penilaian->pemain->kode_pemain }}" required disabled/>
+                        </div>
+                        <div class="col-md-4 mb-3">
                             <label class="form-label" for="basic-default-company">Nama Pemain</label>
                             <input type="text" class="form-control"
                                 value="{{ $penilaian->pemain->name }}" required disabled/>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-4 mb-3">
                             <label class="form-label" for="basic-default-company">Posisi</label>
                             <input type="text" class="form-control" 
                                value="{{ $penilaian->pemain->posisi->name }}" disabled>

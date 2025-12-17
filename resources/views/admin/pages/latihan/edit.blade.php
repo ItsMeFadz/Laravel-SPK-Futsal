@@ -1,4 +1,9 @@
 @extends('admin.layouts.main')
+
+@section('page-script')
+    <script src="{{ asset('assets/js/restrict-date.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="col-xl">
         <div class="card mb-4">
@@ -12,7 +17,7 @@
                     <div class="row mb-2">
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-company">Tanggal</label>
-                            <input type="date" class="form-control" placeholder="dd/mm/yy" name="tanggal"
+                            <input type="date" class="form-control restrict-date" placeholder="dd/mm/yy" name="tanggal"
                                 value="{{ $latihan->tanggal }}" required />
                         </div>
                         <div class="col-md-6 mb-3">

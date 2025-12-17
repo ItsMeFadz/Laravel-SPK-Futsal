@@ -33,6 +33,7 @@
                                         <th>Pemain</th>
                                         <th>Posisi</th>
                                         <th>Aksi</th>
+                                        <th class="text-center">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,14 +45,20 @@
                                             <td>{{ $item->pemain->posisi->name }}</td>
                                             <td>
                                                 <a href="/penilaian/edit/{{ $item->id }}"
-                                                    class="btn btn-sm btn-outline-primary">Edit</a>
-                                                <form action="/penilaian/delete/{{ $l->id }}" method="POST"
-                                                    class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="btn btn-sm btn-outline-danger">Hapus</button>
-                                                </form>
+                                                    class="btn btn-sm btn-outline-info"><i
+                                                        class="bx bx-xs bx-search"></i></a>
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($item->status == 1)
+                                                    <span class="badge badge-center rounded-pill bg-label-danger">
+                                                        <i class="bx bx-xs bx-error"></i>
+                                                    </span>
+                                                @elseif($item->status == 2)
+                                                    <span class="badge badge-center rounded-pill bg-label-success">
+                                                        <i class="bx bx-xs bx-check"></i></span>
+                                                @else
+                                                    -
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

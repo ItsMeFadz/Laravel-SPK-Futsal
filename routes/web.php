@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HasilPerhitunganController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\LatihanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PemainController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\PerhitunganController;
 use App\Http\Controllers\PosisiController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,11 +58,23 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(PenilaianController::class)->group(function () {
         Route::get('/penilaian', 'index')->name('index.penilaian');
-        Route::get('/penilaian/create', 'create')->name('create.penilaian');
-        Route::post('/penilaian/store', 'store')->name('store.penilaian');
+        // Route::get('/penilaian/create', 'create')->name('create.penilaian');
+        // Route::post('/penilaian/store', 'store')->name('store.penilaian');
         Route::get('/penilaian/edit/{id}', 'edit')->name('edit.penilaian');
         Route::post('/penilaian/update/{id}', 'update')->name('update.penilaian');
-        Route::delete('/penilaian/delete/{id}', 'destroy')->name('delete.penilaian');
+        // Route::delete('/penilaian/delete/{id}', 'destroy')->name('delete.penilaian');
+    });
+
+    Route::controller(PerhitunganController::class)->group(function () {
+        Route::get('/perhitungan', 'index')->name('index.perhitungan');
+        Route::get('/perhitungan/edit/{id}', 'edit')->name('edit.perhitungan');
+        Route::post('/perhitungan/update/{id}', 'update')->name('update.perhitungan');
+    });
+
+    Route::controller(HasilPerhitunganController::class)->group(function () {
+        Route::get('/hasilPerhitungan', 'index')->name('index.hasilPerhitungan');
+        Route::get('/hasilPerhitungan/edit/{id}', 'edit')->name('edit.hasilPerhitungan');
+        Route::post('/hasilPerhitungan/update/{id}', 'update')->name('update.hasilPenilaian');
     });
 
 

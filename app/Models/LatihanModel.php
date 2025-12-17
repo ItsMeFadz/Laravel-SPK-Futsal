@@ -15,4 +15,10 @@ class LatihanModel extends Model
         'name',
         'tanggal',
     ];
+
+    public function bobotPenilaian()
+    {
+        return $this->hasMany(BobotPenilaianModel::class, 'latihan_id');
+    }
+
 }

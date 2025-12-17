@@ -53,7 +53,12 @@ class LatihanController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:latihan,name',
-            'tanggal' => 'required|date',
+            'tanggal' => 'required|date|unique:latihan,tanggal',
+        ], [
+            'required' => 'Kolom :attribute harus diisi.',
+            'image' => 'Kolom :attribute harus berupa file gambar.',
+            'mimes' => 'Format yang diperbolehkan: :values.',
+            'unique' => 'tanggal atau nama latihan sudah digunakan.',
         ]);
 
         DB::beginTransaction();
@@ -70,6 +75,7 @@ class LatihanController extends Controller
                 DetailLatihanModel::create([
                     'latihan_id' => $latihan->id,
                     'pemain_id' => $pemainId,
+                    'status' => 1,
                 ]);
             }
 
@@ -100,12 +106,12 @@ class LatihanController extends Controller
         // Validasi
         $validated = $request->validate([
             'name' => 'required|unique:latihan,name,' . $id,
-            'tanggal' => 'required|date',
+            'tanggal' => 'required|date|unique:latihan,tanggal,' . $id,
         ], [
             'required' => 'Kolom :attribute harus diisi.',
             'image' => 'Kolom :attribute harus berupa file gambar.',
             'mimes' => 'Format yang diperbolehkan: :values.',
-            'unique' => 'Kode latihan sudah digunakan.',
+            'unique' => 'tanggal atau nama latihan sudah digunakan.',
         ]);
 
         // Update data

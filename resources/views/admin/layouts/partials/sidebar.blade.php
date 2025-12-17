@@ -105,13 +105,13 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Analisis &amp; Laporan</span></li>
         <!-- Extended components -->
         <li class="menu-item {{ $active === 'Perhitungan' ? 'active' : '' }}">
-            <a href="javascript:void(0)" class="menu-link">
+            <a href="{{ route('index.perhitungan') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bar-chart-square"></i>
                 <div data-i18n="Extended UI">Perhitungan WP-Topsis</div>
             </a>
         </li>
-        <li class="menu-item {{ $active === 'Hasil' ? 'active' : '' }}">
-            <a href="javascript:void(0)" class="menu-link">
+        <li class="menu-item {{ $active === 'hasilPerhitungan' ? 'active' : '' }}">
+            <a href="{{ route('index.hasilPerhitungan') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-list-check"></i>
                 <div data-i18n="Extended UI">Hasil Penilaian</div>
             </a>

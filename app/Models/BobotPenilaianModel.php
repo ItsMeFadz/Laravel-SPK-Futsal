@@ -22,4 +22,10 @@ class BobotPenilaianModel extends Model
     {
         return $this->belongsTo(\App\Models\PemainModel::class, 'pemain_id');
     }
+
+    public function latihan()
+    {
+        return $this->belongsTo(LatihanModel::class, 'latihan_id');
+    }
+
 }
