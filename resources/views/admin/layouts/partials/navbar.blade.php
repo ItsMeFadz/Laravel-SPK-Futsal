@@ -19,11 +19,11 @@
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
-            <li class="nav-item lh-1 me-3">
-                <a class="github-button" href="#"
-                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">{{ Auth::user()->role == 1 ? 'Admin' : 'User' }}</a>
-            </li>
+                {{-- <li class="nav-item lh-1 me-3">
+                    <a class="github-button" href="#" data-icon="octicon-star" data-size="large"
+                        data-show-count="true"
+                        aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">{{ Auth::user()->role == 1 ? 'Admin' : 'Pelatih' }}</a>
+                </li> --}}
 
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -50,12 +50,12 @@
                                         @else
                                             <img src="{{ asset('assets/img/avatars/user-profile.jpg') }}" alt
                                                 class="w-px-40 h-auto rounded-circle" />
-                                            @endif
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-semibold d-block">{{ Auth::user()->name }}</span>
-                                    <small class="text-muted">{{ Auth::user()->role == 1 ? 'Admin' : 'User' }}</small>
+                                    <small class="text-muted">{{ Auth::user()->role == 1 ? 'Admin' : 'Pelatih' }}</small>
                                 </div>
                             </div>
                         </a>
@@ -70,10 +70,13 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="auth-login-basic.html">
-                            <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Keluar</span>
-                        </a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                <i class="bx bx-power-off me-2"></i>
+                                <span class="align-middle">Keluar</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </li>

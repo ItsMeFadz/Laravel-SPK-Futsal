@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/penilaian/edit/{id}', 'edit')->name('edit.penilaian');
         Route::post('/penilaian/update/{id}', 'update')->name('update.penilaian');
         // Route::delete('/penilaian/delete/{id}', 'destroy')->name('delete.penilaian');
+        Route::get('/penilaian/detail/{id}', 'showDetail')->name('show.penilaian');
     });
 
     Route::controller(PerhitunganController::class)->group(function () {

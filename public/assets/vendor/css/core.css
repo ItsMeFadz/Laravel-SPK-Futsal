@@ -16651,3 +16651,11 @@ label:has(+ * :required)::after {
     content: " *";
     color: red;
 }
+
+.photo-wrapper {
+    display: inline-block;
+    padding: 8px;
+    border: 2px dashed #03c3ec;
+    border-radius: 12px;
+    background-color: #fff;
+}

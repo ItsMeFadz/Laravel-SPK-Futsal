@@ -52,7 +52,7 @@
                                 <div class="d-flex gap-2 align-items-center">
 
                                     <a href="/pengguna/edit/{{ $item->id }}" class="d-inline-flex align-items-center">
-                                        <button type="button" class="btn btn-xs btn-outline-primary" title="Edit">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" title="Edit">
                                             <i class='bx bx-pencil'></i>
                                         </button>
                                     </a>
@@ -61,7 +61,7 @@
                                         action="/pengguna/delete/{{ $item->id }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-xs btn-outline-danger"
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
                                             onclick="confirmDelete({{ $item->id }})" title="Delete">
                                             <i class='bx bx-trash'></i>
                                         </button>

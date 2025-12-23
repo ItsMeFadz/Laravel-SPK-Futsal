@@ -53,8 +53,10 @@
                             <td style="vertical-align: middle;">
                                 <div class="d-flex gap-2 align-items-center">
 
-                                    <a href="/kriteria/edit/{{ $item->id }}" class="d-inline-flex align-items-center">
-                                        <button type="button" class="btn btn-xs btn-outline-primary" title="Edit">
+                                    <a href="/kriteria/edit/{{ $item->id }}" class="d-inline-flex align-items-center"
+                                        data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                        data-bs-html="true" title="edit">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" title="Edit">
                                             <i class='bx bx-pencil'></i>
                                         </button>
                                     </a>
@@ -63,8 +65,9 @@
                                         action="/kriteria/delete/{{ $item->id }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-xs btn-outline-danger"
-                                            onclick="confirmDelete({{ $item->id }})" title="Delete">
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                            onclick="confirmDelete({{ $item->id }})" data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="Hapus">
                                             <i class='bx bx-trash'></i>
                                         </button>
                                     </form>

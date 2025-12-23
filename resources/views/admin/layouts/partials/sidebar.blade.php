@@ -32,12 +32,14 @@
                 <div data-i18n="Misc">Kriteria</div>
             </a>
         </li>
-        <li class="menu-item {{ $active === 'Posisi' ? 'active' : '' }}">
-            <a href="{{ route('index.posisi') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-direction-right"></i>
-                <div data-i18n="Account Settings">Posisi</div>
-            </a>
-        </li>
+        @if (auth()->user()->roleName() === 'admin')
+            <li class="menu-item {{ $active === 'Posisi' ? 'active' : '' }}">
+                <a href="{{ route('index.posisi') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-direction-right"></i>
+                    <div data-i18n="Account Settings">Posisi</div>
+                </a>
+            </li>
+        @endif
         <li class="menu-item {{ $active === 'Pemain' ? 'active' : '' }}">
             <a href="{{ route('index.pemain') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-pin"></i>
@@ -55,7 +57,7 @@
             </a>
         </li>
         <li class="menu-item {{ $active === 'Penilaian' ? 'active' : '' }}">
-            <a href="{{route('index.penilaian')}}" class="menu-link">
+            <a href="{{ route('index.penilaian') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-search"></i>
                 <div data-i18n="Basic">Penilaian</div>
             </a>
@@ -63,12 +65,14 @@
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Analisis &amp; Laporan</span></li>
         <!-- Extended components -->
-        <li class="menu-item {{ $active === 'Perhitungan' ? 'active' : '' }}">
-            <a href="{{ route('index.perhitungan') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-bar-chart-square"></i>
-                <div data-i18n="Extended UI">Perhitungan WP-Topsis</div>
-            </a>
-        </li>
+        @if (auth()->user()->roleName() === 'admin')
+            <li class="menu-item {{ $active === 'Perhitungan' ? 'active' : '' }}">
+                <a href="{{ route('index.perhitungan') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-bar-chart-square"></i>
+                    <div data-i18n="Extended UI">Perhitungan WP-Topsis</div>
+                </a>
+            </li>
+        @endif
         <li class="menu-item {{ $active === 'hasilPerhitungan' ? 'active' : '' }}">
             <a href="{{ route('index.hasilPerhitungan') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-list-check"></i>
@@ -76,14 +80,16 @@
             </a>
         </li>
 
+        @if (auth()->user()->roleName() === 'admin')
         <!-- Forms & Tables -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
         <!-- Forms -->
-        <li class="menu-item {{ $active === 'Pengguna' ? 'active' : '' }}">
-            <a href="{{ route('index.pengguna') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                <div data-i18n="Form Elements">Pengguna</div>
-            </a>
-        </li>
+            <li class="menu-item {{ $active === 'Pengguna' ? 'active' : '' }}">
+                <a href="{{ route('index.pengguna') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="Form Elements">Pengguna</div>
+                </a>
+            </li>
+        @endif
     </ul>
 </aside>

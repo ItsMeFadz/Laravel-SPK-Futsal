@@ -85,4 +85,28 @@ class PenilaianController extends Controller
         return redirect('/penilaian')->with('success', 'Penilaian berhasil diperbarui!');
     }
 
+    public function showDetail($detail_latihan_id)
+    {
+        $detail = DetailLatihanModel::with('pemain.posisi')->findOrFail($detail_latihan_id);
+
+        $kriteria = KriteriaModel::all();
+
+        $bobot = BobotPenilaianModel::where('latihan_id', $detail->latihan_id)
+            ->where('pemain_id', $detail->pemain_id)
+            ->get()
+            ->keyBy('kriteria_id');
+
+        return response()->json([
+            'pemain' => [
+                'name' => $detail->pemain->name,
+                'posisi' => $detail->pemain->posisi->name,
+                'image' => $detail->pemain->image, // contoh: pemain1.jpg
+            ],
+            'kriteria' => $kriteria,
+            'bobot' => $bobot
+        ]);
+
+    }
+
+
 }

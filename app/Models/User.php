@@ -46,4 +46,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function roleName()
+    {
+        $roles = [
+            1 => 'admin',
+            2 => 'penjual',
+        ];
+
+        return $roles[$this->role] ?? 'Unknown';
+    }
 }
