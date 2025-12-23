@@ -5,6 +5,21 @@
     <div class="card">
         <div class="d-flex justify-content-between align-items-center">
             <h6 class="card-header">Hasil Rekomendasi Line Up</h6>
+            <div class="btn-group me-3">
+                <button type="button" class="btn d-flex align-items-center btn-primary"><i class="bx bxs-file-import fs-5 me-1"></i>Unduh</button>
+                <button
+                type="button"
+                class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                id="dropdownMenuReference"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-bs-reference="parent">
+                <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                <li><a class="dropdown-item" href={{ route('hasil.export.pdf') }}>PDF</a></li>
+                <li><a class="dropdown-item" href={{ route('hasil.export.excel') }}>Excel</a></li>
+            </div>
         </div>
         <div class="table-responsive text-nowrap">
             <table class="table table-bordered table-sm">

@@ -14,6 +14,18 @@ class PerhitunganController extends Controller
     {
         $pemain = PemainModel::with('posisi')->get();
         $kriteria = KriteriaModel::all();
+        $latihanTerbaru = LatihanModel::latest('tanggal')->first();
+
+        $bobotPenilaian = BobotPenilaianModel::where('latihan_id', $latihanTerbaru->id)
+            ->get()
+            ->keyBy(function ($item) {
+                return $item->pemain_id . '-' . $item->kriteria_id;
+            });
+
+        $bobotPosisi = BobotPosisiModel::all()
+            ->keyBy(function ($item) {
+                return $item->posisi_id . '-' . $item->kriteria_id;
+            });
 
         /**
          * =========================
@@ -24,10 +36,8 @@ class PerhitunganController extends Controller
 
         foreach ($pemain as $p) {
             foreach ($kriteria as $k) {
-                $matrixX[$p->id][$k->id] =
-                    BobotPenilaianModel::where('pemain_id', $p->id)
-                        ->where('kriteria_id', $k->id)
-                        ->value('bobot') ?? 0;
+                $key = $p->id . '-' . $k->id;
+                $matrixX[$p->id][$k->id] = $bobotPenilaian[$key]->bobot ?? 0;
             }
         }
 
@@ -59,22 +69,15 @@ class PerhitunganController extends Controller
          * 3. NORMALISASI Y (WP)
          * =========================
          */
-        $latihanTerbaru = LatihanModel::orderBy('tanggal', 'desc')->first();
-        $penilaian = BobotPenilaianModel::where('latihan_id', $latihanTerbaru->id)
-            ->get()
-            ->groupBy(['pemain_id', 'kriteria_id']);
         $matrixY = [];
         foreach ($pemain as $p) {
             foreach ($kriteria as $k) {
 
-                $bobotWj = BobotPosisiModel::where('posisi_id', $p->id_posisi)
-                    ->where('kriteria_id', $k->id)
-                    ->value('bobot_wj') ?? 0;
-
-                $nilaiLatihan = $penilaian[$p->id][$k->id][0]->bobot ?? 0;
+                $keyPosisi = $p->id_posisi . '-' . $k->id;
+                $bobotWj = $bobotPosisi[$keyPosisi]->bobot_wj ?? 0;
 
                 $matrixY[$p->id][$k->id] =
-                    $nilaiLatihan * $bobotWj;
+                    $matrixR[$p->id][$k->id] * $bobotWj;
             }
         }
 
@@ -169,8 +172,6 @@ class PerhitunganController extends Controller
                 $lineUp[$posisi] = $r;
             }
         }
-
-
 
         /**
          * =========================

@@ -44,13 +44,14 @@ class PenggunaController extends Controller
             'name' => 'required',
             'role' => 'required',
             'password' => 'required|min:8|confirmed',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:800',
         ], [
             'required' => 'Kolom :attribute harus diisi.',
             'max.string' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
             'image' => 'Kolom :attribute harus berupa file gambar.',
             'mimes' => 'Kolom :attribute harus memiliki format: :values.',
             'unique' => 'username sudah digunakan.',
+            'confirmed' => 'Konfirmasi Password tidak sama.',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -59,6 +60,8 @@ class PenggunaController extends Controller
         if ($request->hasFile('image')) {
             $fileName = time() . '_' . $request->file('image')->getClientOriginalName();
             $validated['image'] = $request->file('image')->storeAs('foto_pengguna', $fileName, 'public');
+        } else {
+            $validated['image'] = 'foto_pengguna/user-profile.jpg';
         }
 
         // Simpan

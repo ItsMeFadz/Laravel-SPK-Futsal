@@ -75,12 +75,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/hasilPerhitungan', 'index')->name('index.hasilPerhitungan');
         Route::get('/hasilPerhitungan/edit/{id}', 'edit')->name('edit.hasilPerhitungan');
         Route::post('/hasilPerhitungan/update/{id}', 'update')->name('update.hasilPenilaian');
+        Route::get('/hasil/export/pdf', 'exportPdf')->name('hasil.export.pdf');
+        Route::get('/hasil/export/csv', 'exportExcel')->name('hasil.export.excel');
+
     });
 
 
 
 
-    
+
 
 
 

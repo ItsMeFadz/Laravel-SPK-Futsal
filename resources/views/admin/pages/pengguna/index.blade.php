@@ -36,7 +36,7 @@
                                     // Mapping integer role ke nama role
                                     $roleNames = [
                                         1 => 'Admin',
-                                        2 => 'User',
+                                        2 => 'Pelatih',
                                     ];
 
                                     $badgeClass = match ($role) {

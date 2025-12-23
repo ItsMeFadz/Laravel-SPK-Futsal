@@ -1,4 +1,38 @@
 @extends('admin.layouts.main')
+
+@section('page-script')
+    <script>
+        document.getElementById('upload').addEventListener('change', function(e) {
+            const input = e.target;
+            const file = input.files[0];
+
+            if (file) {
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                const maxSize = 800 * 1024; // 800KB
+
+                if (!allowedTypes.includes(file.type)) {
+                    alert('Only JPG, PNG, or GIF files are allowed.');
+                    input.value = ''; // Reset input
+                    return;
+                }
+
+                if (file.size > maxSize) {
+                    alert('File size must be less than 800KB.');
+                    input.value = ''; // Reset input
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const uploadedAvatar = document.getElementById('avatarUploaded');
+                    uploadedAvatar.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+@endsection
+
 @section('content')
     <div class="card mb-4">
         <h5 class="card-header">Profile Details</h5>
@@ -8,14 +42,14 @@
             @method('POST')
             <div class="card-body">
                 <div class="d-flex align-items-start align-items-sm-center gap-4">
-                    <img src="{{ asset('assets/img/avatars/1.png') }}" alt="user-avatar" class="d-block rounded" height="100"
-                        width="100" id="uploadedAvatar" />
+                    <img src="{{ asset('assets/img/avatars/user-profile.jpg') }}" alt="user-avatar" class="d-block rounded"
+                        id="avatarUploaded" height="100" width="100" id="uploadedAvatar" />
                     <div class="button-wrapper">
                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                             <span class="d-none d-sm-block">Upload new photo</span>
                             <i class="bx bx-upload d-block d-sm-none"></i>
                             <input type="file" id="upload" class="account-file-input" hidden
-                                accept="image/png, image/jpeg" name="image"/>
+                                accept="image/png, image/jpeg" name="image" />
                         </label>
                         <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                             <i class="bx bx-reset d-block d-sm-none"></i>
@@ -55,7 +89,7 @@
                         <select class="form-select" name="role" aria-label="Default select example">
                             <option selected disabled>Select this role</option>
                             <option value="1" {{ old('role') == 1 ? 'selected' : '' }}>Admin</option>
-                            <option value="2" {{ old('role') == 2 ? 'selected' : '' }}>User</option>
+                            <option value="2" {{ old('role') == 2 ? 'selected' : '' }}>Pelatih</option>
                         </select>
                     </div>
                     <div class="mb-3 col-md-6 form-password-toggle">
