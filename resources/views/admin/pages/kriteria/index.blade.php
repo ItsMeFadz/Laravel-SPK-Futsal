@@ -19,7 +19,9 @@
                         <th>#</th>
                         <th>Kode</th>
                         <th>Nama kriteria</th>
-                        <th>Bobot</th>
+                        @foreach ($posisi as $p)
+                            <th class="label bg-label-info">Bobot {{ $p->name }}</th>
+                        @endforeach
                         <th>Atribut</th>
                         <th>Aksi</th>
                     </tr>
@@ -30,7 +32,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kode }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->bobot }}</td>
+                            @foreach ($posisi as $p)
+                                @php
+                                    $bobot = $item->bobotPerPosisi->firstWhere('posisi_id', $p->id);
+                                @endphp
+                                <td class="text-center">{{ $bobot->bobot ?? '-' }}</td>
+                            @endforeach
                             <td class="text-sm">
                                 @php
                                     $atribut = (int) ($item->atribut ?? 0);
@@ -55,8 +62,8 @@
 
                                     <a href="/kriteria/edit/{{ $item->id }}" class="d-inline-flex align-items-center"
                                         data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
-                                        data-bs-html="true" title="edit">
-                                        <button type="button" class="btn btn-sm btn-outline-primary" title="Edit">
+                                        data-bs-html="true" title="Edit">
+                                        <button type="button" class="btn btn-sm btn-outline-primary">
                                             <i class='bx bx-pencil'></i>
                                         </button>
                                     </a>

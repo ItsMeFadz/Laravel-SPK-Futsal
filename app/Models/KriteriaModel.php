@@ -23,4 +23,9 @@ class KriteriaModel extends Model
         return $this->hasMany(BobotPosisiModel::class, 'posisi_id');
     }
 
+    public function bobotPerPosisi()
+    {
+        return $this->hasMany(BobotPosisiModel::class, 'kriteria_id');
+    }
+
 }

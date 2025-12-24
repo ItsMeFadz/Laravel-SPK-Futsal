@@ -51,8 +51,9 @@
                             <td style="vertical-align: middle;">
                                 <div class="d-flex gap-2 align-items-center">
 
-                                    <a href="/pengguna/edit/{{ $item->id }}" class="d-inline-flex align-items-center">
-                                        <button type="button" class="btn btn-sm btn-outline-primary" title="Edit">
+                                    <a href="/pengguna/edit/{{ $item->id }}" class="d-inline-flex align-items-center"  data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                                        data-bs-html="true" title="Edit">
+                                        <button type="button" class="btn btn-sm btn-outline-primary">
                                             <i class='bx bx-pencil'></i>
                                         </button>
                                     </a>
@@ -62,7 +63,8 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-sm btn-outline-danger"
-                                            onclick="confirmDelete({{ $item->id }})" title="Delete">
+                                            onclick="confirmDelete({{ $item->id }})" data-bs-toggle="tooltip"
+                                            data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="Hapus">
                                             <i class='bx bx-trash'></i>
                                         </button>
                                     </form>

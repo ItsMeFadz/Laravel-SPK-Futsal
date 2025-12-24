@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KriteriaModel;
+use App\Models\PosisiModel;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\{Validator, Storage};
@@ -11,11 +12,18 @@ class KriteriaController extends Controller
 {
     public function index()
     {
-        $kriteria = KriteriaModel::all();
+
+        $kriteria = KriteriaModel::with([
+            'bobotPerPosisi.posisi'
+        ])->get();
+
+        $posisi = PosisiModel::all();
+        // $kriteria = KriteriaModel::all();
         return view('admin.pages.kriteria.index', [
             'title' => 'Kriteria',
             'active' => 'Kriteria',
             'kriteria' => $kriteria,
+            'posisi' => $posisi,
         ]);
     }
 
