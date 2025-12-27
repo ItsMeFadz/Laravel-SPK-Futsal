@@ -21,11 +21,6 @@
                                 value="{{ $kriteria->name }}" required />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label" for="basic-default-fullname">Bobot</label>
-                            <input type="number" class="form-control" placeholder="1 - 10" name="bobot"
-                                value="{{ $kriteria->bobot }}" required />
-                        </div>
-                        <div class="col-md-6 mb-3">
                             <label class="form-label" for="basic-default-fullname">Atribut</label>
                             <select class="form-select" name="atribut" aria-label="Default select example">
                                 <option selected disabled>Open this select menu</option>

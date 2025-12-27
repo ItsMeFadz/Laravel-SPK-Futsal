@@ -50,7 +50,6 @@ class KriteriaController extends Controller
         $validated = $request->validate([
             'kode' => 'required|unique:kriteria,kode',
             'name' => 'required',
-            'bobot' => 'required',
             'atribut' => 'required',
         ], [
             'required' => 'Kolom :attribute harus diisi.',
@@ -78,7 +77,6 @@ class KriteriaController extends Controller
         $validated = $request->validate([
             'kode' => 'required|unique:kriteria,kode,' . $id,
             'name' => 'required',
-            'bobot' => 'required',
             'atribut' => 'required',
         ], [
             'required' => 'Kolom :attribute harus diisi.',
