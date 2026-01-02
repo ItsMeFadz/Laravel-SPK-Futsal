@@ -61,7 +61,7 @@
 
                             <div class="col-md-7 col-12">
 
-                                <h4 class="mb-2">Keputusan</h4>
+                                <h4 class="mb-2">Sistem Pendukung Keputusan</h4>
                                 <p class="mb-4">Pemilihan pemain untuk penyusunan Line-Up Futsal</p>
 
                                 <form id="formAuthentication" class="mb-3" action="{{ route('login_proses') }}"
