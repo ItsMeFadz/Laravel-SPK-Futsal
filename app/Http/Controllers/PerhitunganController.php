@@ -12,9 +12,16 @@ class PerhitunganController extends Controller
 {
     public function index()
     {
-        $pemain = PemainModel::with('posisi')->get();
-        $kriteria = KriteriaModel::all();
+        // $pemain = PemainModel::with('posisi')->get();
         $latihanTerbaru = LatihanModel::latest('tanggal')->first();
+        $pemain = PemainModel::with('posisi')
+            ->whereHas('detailLatihan', function ($q) use ($latihanTerbaru) {
+                $q->where('latihan_id', $latihanTerbaru->id)
+                    ->where('status_pemain', 1); // hanya pemain sehat
+            })
+            ->get();
+
+        $kriteria = KriteriaModel::all();
 
         $bobotPenilaian = BobotPenilaianModel::where('latihan_id', $latihanTerbaru->id)
             ->get()

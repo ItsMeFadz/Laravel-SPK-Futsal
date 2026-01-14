@@ -12,18 +12,17 @@
                     <div class="row mb-2">
                         <div class="col-md-4 mb-3">
                             <label class="form-label" for="basic-default-company">Kode Pemain</label>
-                            <input type="text" class="form-control"
-                                value="{{ $penilaian->pemain->kode_pemain }}" required disabled/>
+                            <input type="text" class="form-control" value="{{ $penilaian->pemain->kode_pemain }}" required
+                                disabled />
                         </div>
                         <div class="col-md-4 mb-3">
                             <label class="form-label" for="basic-default-company">Nama Pemain</label>
-                            <input type="text" class="form-control"
-                                value="{{ $penilaian->pemain->name }}" required disabled/>
+                            <input type="text" class="form-control" value="{{ $penilaian->pemain->name }}" required
+                                disabled />
                         </div>
                         <div class="col-md-4 mb-3">
                             <label class="form-label" for="basic-default-company">Posisi</label>
-                            <input type="text" class="form-control" 
-                               value="{{ $penilaian->pemain->posisi->name }}" disabled>
+                            <input type="text" class="form-control" value="{{ $penilaian->pemain->posisi->name }}" disabled>
                         </div>
                     </div>
                 </div>
@@ -36,10 +35,12 @@
                         @foreach ($kriteria as $k)
                             <div class="col-md-4 mb-3">
                                 <div class="mb-2">
-                                    <label class="form-label" for="basic-default-company"><span class="badge bg-info">{{ $k->kode }}</span>
-                                         - {{ $k->name }}</label>
-                                    <input type="number" name="bobot[{{ $k->id }}]" step="0.01"
-                                        class="form-control" placeholder="Masukkan bobot" value="{{ $pivot[$k->id]->bobot ?? '' }}" required>
+                                    <label class="form-label" for="basic-default-company"><span
+                                            class="badge bg-info">{{ $k->kode }}</span>
+                                        - {{ $k->name }}</label>
+                                    <input type="number" name="bobot[{{ $k->id }}]" step="0.01" min="0" max="10"
+                                        oninput="if (this.value > 10) this.value = 10" class="form-control"
+                                        placeholder="Masukkan bobot" value="{{ $pivot[$k->id]->bobot ?? '' }}" required>
                                 </div>
                             </div>
                         @endforeach

@@ -23,6 +23,17 @@ class PemainModel extends Model
 
     public function posisi()
     {
-        return $this->belongsTo(PosisiModel::class, 'id_posisi');
+        return $this->belongsTo(PosisiModel::class, 'id_posisi', 'id');
     }
+
+    public function detailLatihan()
+    {
+        return $this->hasMany(DetailLatihanModel::class, 'pemain_id');
+    }
+
+    public function bobotPenilaian()
+    {
+        return $this->hasMany(BobotPenilaianModel::class, 'pemain_id', 'id');
+    }
+
 }

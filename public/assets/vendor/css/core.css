@@ -97,6 +97,14 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   color: #566a7f;
 }
 
+.h7{
+  /* margin-top: 0;
+  margin-bottom: 1rem; */
+  font-weight: 500;
+  line-height: 1.1;
+  color: #566a7f;
+}
+
 h1, .h1 {
   font-size: calc(1.3625rem + 1.35vw);
 }
@@ -139,6 +147,10 @@ h5, .h5 {
 
 h6, .h6 {
   font-size: 0.9375rem;
+}
+
+h7, .h7 {
+  font-size: 0.9875rem;
 }
 
 p {
@@ -2812,6 +2824,12 @@ textarea.form-control-lg {
   padding: 0.25rem 0.6875rem;
   font-size: 0.75rem;
   border-radius: 0.25rem;
+}
+
+.btn-sm-sm, .btn-group-sm > .btn {
+  padding: 0.15rem 0.5875rem;
+  font-size: 0.75rem;
+  border-radius: 0.15rem;
 }
 
 .fade {
@@ -9862,6 +9880,10 @@ button.list-group-item-gray.active {
   font-size: 0.9375rem !important;
 }
 
+.fs-7 {
+  font-size: 1rem !important;
+}
+
 .fs-tiny {
   font-size: 70% !important;
 }
@@ -16659,3 +16681,35 @@ label:has(+ * :required)::after {
     border-radius: 12px;
     background-color: #fff;
 }
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+}
+    
+.div1 {
+    grid-column: span 2 / span 2;
+}
+
+.div2 {
+    grid-row: span 4 / span 4;
+    grid-column-start: 1;
+    grid-row-start: 2;
+}
+
+.div3 {
+    grid-row: span 4 / span 4;
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+.div4 {
+    grid-column: span 3 / span 3;
+    grid-row: span 5 / span 5;
+    grid-column-start: 3;
+    grid-row-start: 1;
+}
+        
+        

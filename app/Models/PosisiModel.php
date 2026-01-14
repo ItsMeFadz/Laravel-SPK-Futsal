@@ -22,7 +22,7 @@ class PosisiModel extends Model
 
     public function pemain()
     {
-        return $this->hasMany(PemainModel::class, 'id_posisi');
+        return $this->hasMany(PemainModel::class, 'id_posisi', 'id');
     }
 
 

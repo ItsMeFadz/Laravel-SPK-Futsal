@@ -7,6 +7,7 @@ use App\Models\BobotPosisiModel;
 use App\Models\KriteriaModel;
 use App\Models\LatihanModel;
 use App\Models\PemainModel;
+use App\Models\PosisiModel;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -21,10 +22,17 @@ class HasilPerhitunganController extends Controller
 {
     public function index()
     {
+        $posisi = PosisiModel::all();
 
-        $pemain = PemainModel::with('posisi')->get();
-        $kriteria = KriteriaModel::all();
+        // $pemain = PemainModel::with('posisi')->get();
         $latihanTerbaru = LatihanModel::latest('tanggal')->first();
+        $pemain = PemainModel::with('posisi')
+            ->whereHas('detailLatihan', function ($q) use ($latihanTerbaru) {
+                $q->where('latihan_id', $latihanTerbaru->id)
+                    ->where('status_pemain', 1); // hanya pemain sehat
+            })
+            ->get();
+        $kriteria = KriteriaModel::all();
 
         $bobotPenilaian = BobotPenilaianModel::where('latihan_id', $latihanTerbaru->id)
             ->get()
@@ -175,11 +183,11 @@ class HasilPerhitunganController extends Controller
         $lineUp = [];
 
         foreach ($ranking as $r) {
-            $posisi = $r['pemain']->id_posisi;
+            $posisiId = $r['pemain']->id_posisi;
 
             // Ambil pemain terbaik pertama per posisi
-            if (!isset($lineUp[$posisi])) {
-                $lineUp[$posisi] = $r;
+            if (!isset($lineUp[$posisiId])) {
+                $lineUp[$posisiId] = $r;
             }
         }
 
@@ -187,14 +195,22 @@ class HasilPerhitunganController extends Controller
             'title' => 'hasilPerhitungan',
             'active' => 'hasilPerhitungan',
             'lineUp' => $lineUp,
+            'ranking' => $ranking,
+            'posisi' => $posisi,
         ]);
     }
 
     private function getHasilData()
     {
-        $pemain = PemainModel::with('posisi')->get();
-        $kriteria = KriteriaModel::all();
+        // $pemain = PemainModel::with('posisi')->get();
         $latihanTerbaru = LatihanModel::latest('tanggal')->first();
+        $pemain = PemainModel::with('posisi')
+            ->whereHas('detailLatihan', function ($q) use ($latihanTerbaru) {
+                $q->where('latihan_id', $latihanTerbaru->id)
+                    ->where('status_pemain', 1); // hanya pemain sehat
+            })
+            ->get();
+        $kriteria = KriteriaModel::all();
 
         $bobotPenilaian = BobotPenilaianModel::where('latihan_id', $latihanTerbaru->id)
             ->get()
@@ -345,11 +361,11 @@ class HasilPerhitunganController extends Controller
         $lineUp = [];
 
         foreach ($ranking as $r) {
-            $posisi = $r['pemain']->id_posisi;
+            $posisiId = $r['pemain']->id_posisi;
 
             // Ambil pemain terbaik pertama per posisi
-            if (!isset($lineUp[$posisi])) {
-                $lineUp[$posisi] = $r;
+            if (!isset($lineUp[$posisiId])) {
+                $lineUp[$posisiId] = $r;
             }
         }
 
@@ -566,5 +582,39 @@ class HasilPerhitunganController extends Controller
         ]);
     }
 
+    public function getData($pemainId)
+    {
+        // latihan terbaru
+        $latihanTerbaru = LatihanModel::latest('tanggal')->first();
+
+        // latihan lama (contoh: 1 sebelum terakhir)
+        $latihanLama = LatihanModel::orderBy('tanggal', 'desc')->skip(1)->first();
+        $kriteria = KriteriaModel::orderBy('id')->get(['id', 'kode']);
+
+        $getData = function ($latihan) use ($pemainId) {
+            if (!$latihan) return [];
+
+            return BobotPenilaianModel::with('kriteria')
+                ->where('latihan_id', $latihan->id)
+                ->where('pemain_id', $pemainId)
+                ->orderBy('kriteria_id')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'kode'  => $item->kriteria->kode, // K01, K02
+                        'nilai' => $item->bobot
+                    ];
+                });
+        };
+
+        return response()->json([
+            'pemain' => PemainModel::with('posisi')->findOrFail($pemainId),
+            'latest' => $getData($latihanTerbaru),
+            'old'    => $getData($latihanLama),
+            'latest_name' => $latihanTerbaru?->name,
+            'old_name'    => $latihanLama?->name,
+            'kriteria' => $kriteria,
+        ]);
+    }
 
 }

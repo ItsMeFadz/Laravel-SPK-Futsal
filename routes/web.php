@@ -58,12 +58,13 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(PenilaianController::class)->group(function () {
         Route::get('/penilaian', 'index')->name('index.penilaian');
-        // Route::get('/penilaian/create', 'create')->name('create.penilaian');
-        // Route::post('/penilaian/store', 'store')->name('store.penilaian');
         Route::get('/penilaian/edit/{id}', 'edit')->name('edit.penilaian');
         Route::post('/penilaian/update/{id}', 'update')->name('update.penilaian');
-        // Route::delete('/penilaian/delete/{id}', 'destroy')->name('delete.penilaian');
         Route::get('/penilaian/detail/{id}', 'showDetail')->name('show.penilaian');
+        Route::post('/penilaian/status-pemain/update', 'updateStatusPemain')->name('update.statusPemain');
+        Route::get('/penilaian/excel/download/{latihan_id}', 'downloadExcel')->name('download.penilaianExcel');
+        Route::post('/penilaian/excel/upload', 'uploadExcel')->name('upload.penilaianExcel');
+
     });
 
     Route::controller(PerhitunganController::class)->group(function () {
@@ -78,6 +79,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/hasilPerhitungan/update/{id}', 'update')->name('update.hasilPenilaian');
         Route::get('/hasil/export/pdf', 'exportPdf')->name('hasil.export.pdf');
         Route::get('/hasil/export/csv', 'exportExcel')->name('hasil.export.excel');
+        Route::get('/chart/pemain/{pemain}', 'getData');
+        Route::get('/get-pemain-by-posisi/{posisi}', function ($posisi) {
+            return \App\Models\PemainModel::where('id_posisi', $posisi)
+                ->select('id', 'name')
+                ->get();
+        });
 
     });
 

@@ -12,7 +12,7 @@
     </script>
 @endif
 
-@if ($errors->any())
+<!-- @if ($errors->any())
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var errorMessages = @json($errors->all());
@@ -26,7 +26,7 @@
             });
         });
     </script>
-@endif
+@endif -->
 
 
 {{-- @if (session()->get('error'))

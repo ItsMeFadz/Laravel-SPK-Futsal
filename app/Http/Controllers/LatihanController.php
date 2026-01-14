@@ -75,6 +75,7 @@ class LatihanController extends Controller
                 DetailLatihanModel::create([
                     'latihan_id' => $latihan->id,
                     'pemain_id' => $pemainId,
+                    'status_pemain' => 1,
                     'status' => 1,
                 ]);
             }

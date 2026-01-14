@@ -28,4 +28,9 @@ class BobotPenilaianModel extends Model
         return $this->belongsTo(LatihanModel::class, 'latihan_id');
     }
 
+    public function kriteria()
+    {
+        return $this->belongsTo(KriteriaModel::class, 'kriteria_id', 'id');
+    }
+
 }
