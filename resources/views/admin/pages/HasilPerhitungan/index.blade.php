@@ -19,23 +19,47 @@
                 fetch(`/chart/pemain/${pemainId}`)
                     .then(res => res.json())
                     .then(res => {
+                        // tampilkan data pemain
+                        const p = res.pemain;
+                        const jkText = p.jk == 1 ? 'Laki-laki'
+                            : p.jk == 2 ? 'Perempuan'
+                                : '-';
+                        document.getElementById("kodePemain").textContent = p.kode_pemain;
+                        document.getElementById("namaPemain").textContent = p.name;
+                        document.getElementById("kelasPemain").textContent = p.kelas;
+                        document.getElementById("umurPemain").textContent = p.umur;
+                        document.getElementById("jkPemain").textContent = jkText;
+                        document.getElementById("posisiPemain").textContent = p.posisi?.name ?? '-';
 
-                        document.querySelector(".div3 ul").innerHTML = `
-                        <ul>${res.pemain.kode_pemain}</ul>
-                        <ul>${res.pemain.name}</ul>
-                        <ul>${res.pemain.kelas}</ul>
-                        <ul>${res.pemain.umur}</ul>
-                        <ul>${res.pemain.jk}</ul>
-                        <ul>${res.pemain.posisi.name}</ul>
-                    `;
 
-                        initChart(
-                            res.latest.map(i => i.kode),
-                            res.latest.map(i => i.nilai),
-                            res.old.map(i => i.nilai),
-                            res.latest_name, // ← dari tabel latihan (field name)
-                            res.old_name
-                        );
+                        // ambil labels dari dataset pertama (asumsi semua dataset punya kriteria sama)
+                        // const labels = res.datasets[0]?.data.map(i => i.kode) ?? [];
+                        const labels = res.kriteria.map(k => k.name);
+
+                        const colors = [
+                            "rgba(75,192,192,1)",
+                            "rgba(246, 48, 73, 1)",
+                            "rgba(43, 52, 103,1)",
+                        ];
+
+                        const chartDatasets = res.datasets
+                            .slice() // buat salinan supaya tidak mengubah array asli
+                            .reverse() // balik urutan, latihan terbaru jadi terakhir → digambar di atas
+                            .map((d, i) => ({
+                                label: d.name,
+                                data: res.kriteria.map(k => {
+                                    const found = d.data.find(x => x.name === k.name);
+                                    return found ? found.nilai : 0;
+                                }),
+                                fill: i === 0, // fill untuk latihan terbaru sekarang di awal array
+                                borderDash: i !== 0 ? [5, 5] : [], // garis putus-putus untuk latihan sebelumnya
+                                borderColor: colors[i % colors.length],
+                                backgroundColor: colors[i % colors.length].replace("1)", "0.3)")
+                            }));
+
+
+
+                        initChart(labels, chartDatasets);
                     });
             });
 
@@ -82,7 +106,7 @@
             <div class="card-body">
                 <div class="collapse" id="collapseExample">
                     <div class="parent">
-                        <div class="row div1">
+                        <div class="row div1 align-items-center">
                             <div class="col-md-4">
                                 <div class="input-group input-group-merge">
                                     <span id="basic-icon-default-fullname2" class="input-group-text"><i
@@ -113,22 +137,45 @@
                             </div>
                         </div>
                         <div class="div2">
-                            <div class="col-md-12">
-                                <li>
-                                    <ul>Kode Pemain :</ul>
-                                    <ul>Nama Pemain :</ul>
-                                    <ul>Kelas :</ul>
-                                    <ul>Umur :</ul>
-                                    <ul>Jenis Kelamin :</ul>
-                                    <ul>Posisi :</ul>
-                                </li>
-                            </div>
-                        </div>
-                        <div class="div3">
-                            <div class="col-md-12">
-                                <li>
-                                    <ul>disini datanya</ul>
-                                </li>
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-bordered table-sm">
+                                    <thead>
+                                        <tr class="table-dark fw-bold text-center">
+                                            <td>Informasi</td>
+                                            <td>Data</td>
+                                        </tr>
+                                    </thead>
+                                    <colgroup>
+                                        <col style="width: 50%">
+                                        <col style="width: 50%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-dark">Kode Pemain</td>
+                                            <td>: <span id="kodePemain"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-dark">Nama Pemain</td>
+                                            <td>: <span id="namaPemain"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-dark">Kelas</td>
+                                            <td>: <span id="kelasPemain"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-dark">Umur</td>
+                                            <td>: <span id="umurPemain"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-dark">Jenis Kelamin</td>
+                                            <td>: <span id="jkPemain"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-dark">Posisi</td>
+                                            <td>: <span id="posisiPemain"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="div4">

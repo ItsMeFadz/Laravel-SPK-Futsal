@@ -106,41 +106,77 @@ var graphData = {
 // var mySvg = new Chart(svgContext, graphData);
 // Failed to create chart: can't acquire context from the given item
 
+// let radarChart;
+
+// function initChart(labels = [], latest = [], old = [], latestName = "Latihan Terbaru",
+//     oldName = "Latihan Lama") {
+
+//     console.log("labels:", labels);
+//     console.log("latest:", latest);
+//     console.log("old:", old);
+//     const canvas = document.getElementById("radarCanvas");
+//     if (!canvas) return;
+
+//     const ctx = canvas.getContext("2d");
+
+//     if (radarChart) radarChart.destroy();
+
+//     radarChart = new Chart(ctx, {
+//         type: "radar",
+//         data: {
+//             labels: labels,
+//             datasets: [
+//                 {
+//                     label: oldName,
+//                     data: old,
+//                     fill: false,
+//                     borderDash: [5, 5],
+//                     borderColor: "rgba(255,99,132,1)"
+//                 },
+//                 {
+//                     label: latestName,
+//                     data: latest,
+//                     fill: true,
+//                     backgroundColor: "rgba(75,192,192,0.3)",
+//                     borderColor: "rgba(75,192,192,1)"
+//                 }
+                
+//             ]
+//         },
+//         options: {
+//             responsive: true,
+//             maintainAspectRatio: false,
+//             scales: {
+//                 r: {
+//                     min: 0,
+//                     max: 10,
+//                     ticks: {
+//                         stepSize: 1,
+//                         backdropColor: 'transparent'
+//                     }
+//                 }
+//             }
+//         }
+//     });
+
+// }
+
+// console.log(svgContext.getSerializedSvg(true));
+
 let radarChart;
 
-function initChart(labels = [], latest = [], old = [], latestName = "Latihan Terbaru",
-    oldName = "Latihan Lama") {
-
-    console.log("labels:", labels);
-    console.log("latest:", latest);
-    console.log("old:", old);
+function initChart(labels = [], datasets = []) {
     const canvas = document.getElementById("radarCanvas");
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
-
     if (radarChart) radarChart.destroy();
 
     radarChart = new Chart(ctx, {
         type: "radar",
         data: {
             labels: labels,
-            datasets: [
-                {
-                    label: latestName,
-                    data: latest,
-                    fill: true,
-                    backgroundColor: "rgba(75,192,192,0.3)",
-                    borderColor: "rgba(75,192,192,1)"
-                },
-                {
-                    label: oldName,
-                    data: old,
-                    fill: false,
-                    borderDash: [5, 5],
-                    borderColor: "rgba(255,99,132,1)"
-                }
-            ]
+            datasets: datasets
         },
         options: {
             responsive: true,
@@ -157,7 +193,4 @@ function initChart(labels = [], latest = [], old = [], latestName = "Latihan Ter
             }
         }
     });
-
 }
-
-// console.log(svgContext.getSerializedSvg(true));

@@ -585,14 +585,38 @@ class HasilPerhitunganController extends Controller
     public function getData($pemainId)
     {
         // latihan terbaru
-        $latihanTerbaru = LatihanModel::latest('tanggal')->first();
+        $latihans = LatihanModel::orderBy('tanggal', 'desc')
+            ->take(3)
+            ->get()
+            ->sortBy('tanggal');
 
-        // latihan lama (contoh: 1 sebelum terakhir)
-        $latihanLama = LatihanModel::orderBy('tanggal', 'desc')->skip(1)->first();
-        $kriteria = KriteriaModel::orderBy('id')->get(['id', 'kode']);
+        $pemain = PemainModel::with('posisi')->findOrFail($pemainId);
+        $datasets = [];
+
+        foreach ($latihans as $latihan) {
+            $data = BobotPenilaianModel::with('kriteria')
+                ->where('latihan_id', $latihan->id)
+                ->where('pemain_id', $pemainId)
+                ->orderBy('kriteria_id')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'name' => $item->kriteria->name,
+                        'nilai' => $item->bobot
+                    ];
+                });
+
+            $datasets[] = [
+                'name' => $latihan->name,
+                'data' => $data
+            ];
+        }
+
+        $kriteria = KriteriaModel::orderBy('id')->get(['id', 'name']);
 
         $getData = function ($latihan) use ($pemainId) {
-            if (!$latihan) return [];
+            if (!$latihan)
+                return [];
 
             return BobotPenilaianModel::with('kriteria')
                 ->where('latihan_id', $latihan->id)
@@ -601,19 +625,20 @@ class HasilPerhitunganController extends Controller
                 ->get()
                 ->map(function ($item) {
                     return [
-                        'kode'  => $item->kriteria->kode, // K01, K02
+                        'name' => $item->kriteria->name, // K01, K02
                         'nilai' => $item->bobot
                     ];
                 });
         };
 
         return response()->json([
-            'pemain' => PemainModel::with('posisi')->findOrFail($pemainId),
-            'latest' => $getData($latihanTerbaru),
-            'old'    => $getData($latihanLama),
-            'latest_name' => $latihanTerbaru?->name,
-            'old_name'    => $latihanLama?->name,
+            'pemain' => $pemain,
+            // 'latest' => $getData($latihanTerbaru),
+            // 'old' => $getData($latihanLama),
+            // 'latest_name' => $latihanTerbaru?->name,
+            // 'old_name' => $latihanLama?->name,
             'kriteria' => $kriteria,
+            'datasets' => $datasets
         ]);
     }
 
