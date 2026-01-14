@@ -3,7 +3,7 @@
     <div class="col-xl">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Tambah Data</h5>
+                <h5 class="mb-0">Edit Data</h5>
             </div>
             <div class="card-body">
                 <form action="/kriteria/update/{{ $kriteria->id }}" enctype="multipart/form-data" method="post">

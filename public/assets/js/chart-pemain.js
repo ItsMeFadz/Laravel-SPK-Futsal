@@ -173,24 +173,24 @@ function initChart(labels = [], datasets = []) {
     if (radarChart) radarChart.destroy();
 
     radarChart = new Chart(ctx, {
-        type: "radar",
-        data: {
-            labels: labels,
-            datasets: datasets
+    type: "radar",
+    data: {
+        labels: labels,
+        datasets: datasets
+    },
+    options: {
+        animation: {
+            duration: 0 // nonaktifkan animasi
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    min: 0,
-                    max: 10,
-                    ticks: {
-                        stepSize: 1,
-                        backdropColor: 'transparent'
-                    }
-                }
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                min: 0,
+                max: 10,
+                ticks: { stepSize: 1, backdropColor: 'transparent' }
             }
         }
+    }
     });
 }
