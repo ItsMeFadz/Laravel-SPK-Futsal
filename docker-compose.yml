@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_frankenphp
+    restart: unless-stopped
+    ports:
+      - "9000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    networks:
+      - laravel_net
+
+
+networks:
+  laravel_net:
+    driver: bridge

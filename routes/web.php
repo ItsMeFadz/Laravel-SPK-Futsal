@@ -87,14 +87,7 @@ Route::middleware('auth')->group(function () {
         });
 
     });
-
-
-
-
-
-
-
-
+    
     Route::controller(PenggunaController::class)->group(function () {
         Route::get('/pengguna', 'index')->name('index.pengguna');
         Route::get('/pengguna/create', 'create')->name('create.pengguna');

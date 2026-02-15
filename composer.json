@@ -10,6 +10,7 @@
         "barryvdh/laravel-dompdf": "^3.1",
         "doctrine/dbal": "^4.4",
         "laravel/framework": "^11.0",
+        "laravel/octane": "^2.13",
         "laravel/tinker": "^2.9",
         "phpoffice/phpspreadsheet": "^5.3",
         "usernotnull/tall-toasts": "^2.2"
