@@ -1,22 +1,25 @@
 FROM dunglas/frankenphp:1-php8.2
 
 RUN apt-get update && apt-get install -y \
-    git unzip curl \
+    git unzip curl iproute2 iputils-ping netcat-openbsd \
     libpng-dev libonig-dev libxml2-dev libzip-dev \
     && docker-php-ext-install \
-        pdo pdo_mysql mbstring zip exif pcntl bcmath gd
+        pdo pdo_mysql mbstring zip exif pcntl bcmath gd \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# copy source
+# COPY SEMUA SOURCE DULU (PENTING)
 COPY . .
 
-# install dependency production only
-RUN composer install --no-dev --optimize-autoloader
+# BARU install dependency
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Permission
+RUN chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 EXPOSE 8000
 
